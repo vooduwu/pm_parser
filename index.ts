@@ -105,12 +105,13 @@ const decodeBlob = async (buffer: ArrayBuffer): Promise<THREE.Group> => {
 const parseNodes = (segment: THREE.Object3D<THREE.Object3DEventMap>): Node[] => {
   const nodes = segment.getObjectByName("Nodes");
   if (!nodes) {
-    throw Error("Nodes not found on segment!")
+    console.warn("Nodes not found on segment!")
+    return []
   }
   return nodes.children.map((node) => ({
     node: node.name,
     type: node.userData.type as NodeType,
-    points: new Float64Array(node.userData.points || []),
+    points: node.userData.points || [],
     to: node.userData.to || ""
   }));
 };
