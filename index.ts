@@ -1,21 +1,17 @@
-// my current goal is to make this process work better,
-// more reliablie and easier to test!!!!!
-
-
 import * as THREE from "three";
 import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-export type NodeType = "Jump" | "Track" | "Split" | "Root" | "End";
+type NodeType = "Jump" | "Track" | "Split" | "Root" | "End";
 
-export type Node = {
+type Node = {
   node: string;
   type: NodeType;
   points: Float64Array;
-  to: string;
+  to: string[];
 }
 
-export type Point = {
+type Point = {
   position: [number,number,number],
   hash: string,
 }
@@ -28,7 +24,8 @@ export type Point = {
 export const encodeScene = async (
   mesh:
     | THREE.Object3D<THREE.Object3DEventMap>
-    | THREE.Object3D<THREE.Object3DEventMap>[],
+    | THREE.Object3D<THREE.Object3DEventMap>[]
+    | THREE.Group<THREE.Object3DEventMap>,
 ): Promise<ArrayBuffer> => {
   const exporter = new GLTFExporter();
   try {
