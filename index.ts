@@ -25,7 +25,6 @@ export const encodeScene = async (
   mesh:
     | THREE.Object3D<THREE.Object3DEventMap>
     | THREE.Object3D<THREE.Object3DEventMap>[]
-    | THREE.Group<THREE.Object3DEventMap>,
 ): Promise<ArrayBuffer> => {
   const exporter = new GLTFExporter();
   try {
