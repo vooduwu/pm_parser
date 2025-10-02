@@ -6,14 +6,14 @@ type NodeType = "Jump" | "Track" | "Split" | "Root" | "End";
 
 type Node = {
   node: string;
-  type: NodeType;
+  nodeType: NodeType;
   points: number[];
   to: string[];
 }
 
 type Point = {
   position: [number,number,number],
-  hash: string,
+  point: string,
 }
 
 /**
@@ -106,8 +106,8 @@ const parseNodes = (segment: THREE.Object3D<THREE.Object3DEventMap>): Node[] => 
   }
   return nodes.children.map((node) => ({
     node: node.name,
-    type: node.userData.type as NodeType,
+    nodeType: node.userData.nodeType as NodeType,
     points: Array.from(node.userData.points) || [],
-    to: node.userData.to || ""
+    to: node.userData.to || []
   }));
 };
